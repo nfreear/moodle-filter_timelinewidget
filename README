@@ -20,18 +20,18 @@ Usage
 Type the following in Moodle's rich-editor (note, line-breaks, which can
 be represented by <br /> are required):
 
-[Timeline]
-; A comment.
-title  = Important inventions timeline
-dataUrl= /moodle/file.php/2/simile-invent.xml
-; The date on which to centre the timeline initially. This can
-; be just a year, or a full date, eg. 20 January 1870.
-date   = 1870
-; UPPER-CASE! minute,hour,day,week,month,year,decade,century,millenium.
-intervalUnit  = CENTURY
-; How wide should the unit defined above be? In pixels.
-intervalPixels= 75
-[/Timeline]
+  [Timeline]
+  ; A comment.
+  title  = Important inventions timeline
+  dataUrl= /moodle/file.php/2/simile-invent.xml
+  ; The date on which to centre the timeline initially. This can
+  ; be just a year, or a full date, eg. 20 January 1870.
+  date   = 1870
+  ; UPPER-CASE! minute,hour,day,week,month,year,decade,century,millenium.
+  intervalUnit  = CENTURY
+  ; How wide should the unit defined above be? In pixels.
+  intervalPixels= 75
+  [/Timeline]
 
 
 NOTE. The filter creates a very simple timeline, with only one band!
@@ -40,9 +40,9 @@ Rights
 ------
 
 Filter. Copyright (c) 2010 Nicholas Freear.
-http://gnu.org/copyleft/gpl.html
-http://freear.org.uk/moodle/
+* <http://gnu.org/copyleft/gpl.html>
+* <http://freear.org.uk/#moodle>
 
 SIMILE. Copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
-http://opensource.org/licenses/bsd-license.php
-http://simile.mit.edu/
+* <http://opensource.org/licenses/bsd-license.php>
+* <http://simile.mit.edu/>
