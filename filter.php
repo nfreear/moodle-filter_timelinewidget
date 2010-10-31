@@ -1,7 +1,7 @@
 <?php
 /**
  * Timeline Widget filter.
- *   A Moodle filter to embed a MIT SIMILE Timeline Javascript widget.
+ *   A Moodle filter to embed an MIT SIMILE Timeline Javascript widget.
  *
  * Uses: MIT SIMILE; also, parse_ini_string function (compat.php).
  *
@@ -16,14 +16,20 @@
  * @link      http://simile.mit.edu/
  */
 /**
-  Usage:
+ Installation:
+  1. Download and unzip the code files. Copy to the directory on the server,
+       eg. /var/www/moodle/filter/timelinewidget/
+  2. Log in to Moodle as admin, visit Site Administration | Modules | Filters | Manage Filters. Scroll down and click on the icon for Timelinewidget to enable it.
 
-Type the following in Moodle's rich-editor (note, line-breaks, which can be represented by <br /> are required):
+ Usage:
+
+ Type the following in Moodle's rich-editor (note, line-breaks, which can
+ be represented by <br /> are required):
 
 [Timeline]
 ; A comment.
 title  = Important inventions timeline
-dataUrl= ../similie-invent.xml
+dataUrl= /moodle/file.php/2/simile-invent.xml
 ; The date on which to centre the timeline initially. This can
 ; be just a year, or a full date, eg. 20 January 1870.
 date   = 1870
@@ -48,11 +54,9 @@ NOTE 2. Why the square bracket/INI-file syntax above?
 //  To activate this filter, add a line like this to your
 //  list of filters in your Filter configuration:
 //
-//  filter/simile/filter.php
+//  filter/timelinewidget/filter.php
 //
 //////////////////////////////////////////////////////////////
-
-#require_once($CFG->libdir.'/weblib.php');
 
 /// This is the filtering function itself.  It accepts the
 /// courseid and the text to be filtered (in HTML form).
@@ -100,18 +104,14 @@ function _timeline_filter_callback($matches_ini) {
     $config = (object) array_merge($defaults, $config);
 
     // We probably should check types here too.
-    
     if (!isset($config->dataUrl)) {
         echo "Error, missing 'dataUrl'";
     }
     if (!isset($config->date)) {
         echo "Error, missing 'date'";
     }
-    if (!isset($config->date)) {
-        echo "Error, missing 'date'";
-    }
 
-    // Oh dear! Big problems with require_js and caching :( - hard-code YUI scripts below.
+    // Problems with require_js and caching :( - hard-code YUI scripts below.
     //require_js(array('yui_yahoo', 'yui_event'));
 
     $yui_root= "$CFG->wwwroot/lib/yui";
@@ -170,6 +170,5 @@ window.onresize = onResize;
 EOF;
     return $newtext;
 }
-
 
 #End.
