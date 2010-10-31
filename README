@@ -7,7 +7,7 @@ A Moodle filter to embed an MIT SIMILE Timeline Javascript widget.
 
 Requirements: tested with Moodle 1.9.7 (all Moodle 1.9.x should work).
 
-Uses: MIT SIMILE; also, parse_ini_string function (compat.php).
+Uses:  MIT SIMILE; also, `parse_ini_string` function (compat.php).
 
 Installation
 ------------ 
@@ -33,18 +33,20 @@ be represented by <br /> are required):
     intervalPixels= 75
     [/Timeline]
 
-
-NOTE. The filter creates a very simple timeline, with only one band!
+Notes
+-----
+* The filter creates a very simple timeline, with only one band!
+* In the near future, I plan to allow dynamic timeline generation from a Moodle Database activity.
 
 Rights
 ------
 
 Filter. Copyright (c) 2010 Nicholas Freear.
 
-*  <http://gnu.org/copyleft/gpl.html>
+*  License <http://gnu.org/copyleft/gpl.html>
 *  <http://freear.org.uk/#moodle>
 
 SIMILE. Copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
 
-*  <http://opensource.org/licenses/bsd-license.php>
+*  License <http://opensource.org/licenses/bsd-license.php>
 *  <http://simile.mit.edu/>
