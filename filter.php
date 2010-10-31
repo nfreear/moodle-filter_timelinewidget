@@ -3,8 +3,6 @@
  * Timeline Widget filter.
  *   A Moodle filter to embed a MIT SIMILE Timeline Javascript widget.
  *
- * (NOTE, there is a problem with the require_js(yahoo_yui,..) call below - caching :(.)
- *
  * Uses: MIT SIMILE; also, parse_ini_string function (compat.php).
  *
  * @category  Moodle4-9
@@ -35,17 +33,6 @@ intervalUnit  = CENTURY
 intervalPixels= 75
 [/Timeline]
 
-OR
-
-[Timeline]
-; Alternatively, get data from Moodle.
-dataSrc= mod/data
-dataId = 4
-wikiUrl= mod/forum/discuss.php?d=2
-date   = 1870
-intervalUnit  = CENTURY
-intervalPixels= 75
-[/Timeline]
 
 Tested with Moodle 1.9.7.
 
@@ -124,23 +111,24 @@ function _timeline_filter_callback($matches_ini) {
         echo "Error, missing 'date'";
     }
 
-    //
-    // Oh dear! Big problems with caching :((
-    //
-    require_js(array('yui_yahoo', 'yui_event'));
+    // Oh dear! Big problems with require_js and caching :( - hard-code YUI scripts below.
+    //require_js(array('yui_yahoo', 'yui_event'));
 
-    $root = "$CFG->wwwroot/filter/timelinewidget";
+    $yui_root= "$CFG->wwwroot/lib/yui";
+    $tl_root = "$CFG->wwwroot/filter/timelinewidget";
 
     // For now, we embed the Javascript inline. 
     $newtext = <<<EOF
 
 <script type="text/javascript">
-var Timeline_ajax_url ="$root/timeline_ajax/simile-ajax-api.js";
-var Timeline_urlPrefix="$root/timeline_js/";       
+var Timeline_ajax_url ="$tl_root/timeline_ajax/simile-ajax-api.js";
+var Timeline_urlPrefix="$tl_root/timeline_js/";
 var Timeline_parameters="bundle=true";
 </script>
-<script src="$root/timeline_js/timeline-api.js" type="text/javascript"></script>
-<script>
+<script src="$tl_root/timeline_js/timeline-api.js" type="text/javascript"></script>
+<script src="$yui_root/yahoo/yahoo-min.js" type="text/javascript"></script>
+<script src="$yui_root/event/event-min.js" type="text/javascript"></script>
+<script type="text/javascript">
 var tl;
 function onLoad() {
    var eventSource = new Timeline.DefaultEventSource();
