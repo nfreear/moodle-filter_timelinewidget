@@ -3,11 +3,12 @@
 Timeline Widget filter
 ======================
 
-A Moodle filter to embed an MIT SIMILE Timeline Javascript widget.
+A Moodle filter to embed an MIT SIMILE Timeline Javascript interactive widget.
+You and your class can use it to visualize temporal/ historical data.
 
-Requirements: tested with Moodle 1.9.7 (all Moodle 1.9.x should work).
+Requirements: tested with Moodle 1.9.7 (all Moodle 1.9.x should work, Moodle 2.x may work- let me know).
 
-Uses:  MIT SIMILE; also, `parse_ini_string` function (compat.php).
+Uses:  MIT SIMILE (v2.3.0); also, `parse_ini_string` function (see compat.php).
 
 Installation
 ------------ 
@@ -18,7 +19,7 @@ Installation
 Usage
 -----
 Type the following in Moodle's rich-editor (note, line-breaks, which can
-be represented by <br /> are required):
+be represented by &lt;br /> are required):
 
     [Timeline]
     ; A comment.
@@ -38,9 +39,8 @@ Notes
 * The filter creates a very simple timeline, with only one band!
 * In the near future, I plan to allow dynamic timeline generation from a Moodle Database activity.
 
-Rights
-------
-
+Credits
+-------
 Filter. Copyright (c) 2010 Nicholas Freear.
 
 *  License <http://gnu.org/copyleft/gpl.html>

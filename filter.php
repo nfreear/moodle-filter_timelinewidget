@@ -16,15 +16,8 @@
  * @link      http://simile.mit.edu/
  */
 /**
- Installation:
-  1. Download and unzip the code files. Copy to the directory on the server,
-       eg. /var/www/moodle/filter/timelinewidget/
-  2. Log in to Moodle as admin, visit Site Administration | Modules | Filters | Manage Filters. Scroll down and click on the icon for Timelinewidget to enable it.
-
- Usage:
-
- Type the following in Moodle's rich-editor (note, line-breaks, which can
- be represented by <br /> are required):
+ Usage.
+ Type the following in Moodle's rich-editor:
 
 [Timeline]
 ; A comment.
@@ -40,11 +33,7 @@ intervalPixels= 75
 [/Timeline]
 
 
-Tested with Moodle 1.9.7.
-
-NOTE 1. This creates a very simple timeline, with only one band!
-
-NOTE 2. Why the square bracket/INI-file syntax above?
+NOTE. Why the square bracket/INI-file syntax above?
   A good question! I am initially writing this filter for use by teachers who may be fairly non-technical. So, after some deliberation, I chose something that was as 'clean' and readable as possible, could not be confused with HTML and can easily be entered in a WYSIWYG editor in Moodle. The downsides are that line-breaks (which can be <br>, <br />) are required, and if you disable the filter, you're left with 'weird' square brackets.
 */
 
@@ -164,9 +153,9 @@ YAHOO.util.Event.onDOMReady(window.setTimeout(onLoad, 500));
 window.onresize = onResize;
 </script>
 
-<a href="$config->dataUrl" type="application/xml" title="XML">$config->title timeline<span> XML</span></a>
-
 <div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc"></div>
+
+<p class="tl-widget-alt"><a href="$config->dataUrl" type="application/xml" title="XML">$config->title<span> (XML)</span></a></p>
 
 EOF;
     return $newtext;

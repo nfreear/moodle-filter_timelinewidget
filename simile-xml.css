@@ -7,8 +7,9 @@
 
 data  { font:1em Arial,sans-serif; }
 event { display:block; margin:1em; }
-event:before { content:attr(start)' - 'attr(end)' : 'attr(title); display:block; color:#00d; margin:.5em 0; font-size:1.1em; }
-__event:first-child:before { font-size:1.6em; }
+event:before{ content:attr(start)' - 'attr(end)' : 'attr(title);
+    display:block; color:#00c; margin:.5em 0; font-size:1.1em; }
+event[class=dummy]:before{ content:''; }
 
-html|a    { display:block; margin:1em; }
-html|title{ position:absolute; top:-999em; }
+data html|a    { display:block; margin:1em; }
+data html|title{ display:block; font-size:1.7em; color:#00c;}
