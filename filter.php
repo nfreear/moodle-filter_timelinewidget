@@ -84,6 +84,7 @@ function timelinewidget_filter($courseid, $text) {
     return $newtext;
 }
 
+
 function _timeline_filter_callback($matches_ini) {
     global $CFG;
 
