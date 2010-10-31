@@ -1,0 +1,4 @@
+# Use glob syntax.
+syntax: glob
+
+.DS_Store
