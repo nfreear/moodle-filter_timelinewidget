@@ -112,7 +112,8 @@ function _timeline_filter_callback($matches_ini) {
             function(xml, url) { eventSource.loadXML(xml, url); });
 EOS;
         $alt_link = <<<EOS
-    <p class="tl-widget-alt xml" style="background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;"><a href="$config->dataUrl" type="application/xml" title="XML timeline data">$config->title<abbr class="accesshide"> XML</abbr></a></p>
+    <p class="tl-widget-alt xml" id="tl-widget-end"
+    style="background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;"><a href="$config->dataUrl" type="application/xml" title="XML timeline data">$config->title<abbr class="accesshide"> XML</abbr></a></p>
 EOS;
     }
     elseif (isset($config->dataId)) { //JSON.
@@ -121,7 +122,8 @@ EOS;
             function(json, url) { eventSource.loadJSON(json, url); });
 EOS;
         $alt_link = <<<EOS
-    <p class="tl-widget-alt mod-data" style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:28px;"><a href=
+    <p class="tl-widget-alt mod-data" id="tl-widget-end"
+    style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:28px;"><a href=
     "$CFG->wwwroot/mod/data/view.php?d=$config->dataId"  title="Data source">$config->title</a></p>
 EOS;
     } else {
@@ -137,6 +139,11 @@ EOS;
 </style>*/
     $newtext = <<<EOF
 
+<style>
+.tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
+.tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}
+</style>
+<a href="#tl-widget-end" class="tl-widget-skip">Skip over the timeline widget.</a>
 <script type="text/javascript">
 var Timeline_ajax_url ="$tl_root/timeline_ajax/simile-ajax-api.js";
 var Timeline_urlPrefix="$tl_root/timeline_js/";
