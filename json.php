@@ -1,8 +1,13 @@
 <?php
 /**
-  Dynamically output SIMILE Timeline JSON, given a Moodle Database ID.
-  (So, effectively a json-feed for 'data'.)
-
+ * Dynamically output SIMILE Timeline JSON, given a Moodle Database ID, and 
+ * the correct schema (effectively a json-feed for 'data'.)
+ *
+ * @author    Nick Freear.
+ * @copyright Copyright (c) 2010 Nicholas Freear.
+ * @license   http://gnu.org/copyleft/gpl.html
+ */
+/**
   Usage 2:
 
 [Timeline]
@@ -27,6 +32,7 @@ $json_pad   = optional_param('jsonpad', 'var timeline_data', PARAM_RAW);
 
 $json_pad_var = FALSE;
 if (preg_match('/^var [a-zA-Z_]+$/', $json_pad)) {
+    #Variable.
     $json_pad_var = TRUE;
 } elseif (preg_match('/^[a-zA-Z_]+$/', $json_pad)) {
     #Function name.
@@ -37,12 +43,14 @@ if (preg_match('/^var [a-zA-Z_]+$/', $json_pad)) {
 _timeline_get_data($module_id, $module=NULL);
 
 
-function _timeline_get_data($data_id, $data_mod) { #$courseid=NULL, $config=NULL) {
+function _timeline_get_data($data_id, $data_mod) {
     #$courseid= 2;
 
     if (is_numeric($data_id)) { // backwards compatibility
         $data = get_record('data', 'id', $data_id);
     }
+    #ELSE: error?
+
     $name = $data->name;
     $intro= $data->intro;
 
@@ -52,12 +60,6 @@ function _timeline_get_data($data_id, $data_mod) { #$courseid=NULL, $config=NULL
     foreach ($data_fields as $field) {
         $ids[$field->name] = $field->id;
         $fields[$field->id] = $field->name;
-
-        /*switch ($field->name) {
-        case 'title': //Required.
-            $ids
-            break;
-        }*/
     }
     //Required.
     if (!isset($ids['title'])) {
@@ -115,7 +117,7 @@ function _timeline_get_data($data_id, $data_mod) { #$courseid=NULL, $config=NULL
 
 function parse_date_to_iso($value) {
     $iso = false;
-    if (is_numeric($value) && $value < 1000) { #Just a year<1000, eg. 868 ?!
+    if (is_numeric($value) && $value < 1000) { #Just a year<1000, eg. 868?!
         $iso = sprintf('%04d', $value);
     } elseif (is_numeric($value)) {
         $iso = $value;
@@ -125,8 +127,7 @@ function parse_date_to_iso($value) {
             $iso = date('c', $ts);
         } elseif (function_exists('date_parse')) { #PHP 5.2+
             $p = (object) date_parse($value); #("December 5, 1822");
-            $iso = sprintf("%04d-%02d-%02d", $p->year, $p->month, $p->day); #Hours..?
-                        #"$p->year-$p->month-{$p->day}"; #T.
+            $iso = sprintf("%04d-%02d-%02d", $p->year, $p->month, $p->day); #Hours..? #T.
         } else {
             $iso = $value; #Pray!
         }

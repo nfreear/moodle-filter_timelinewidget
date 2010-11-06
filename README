@@ -52,6 +52,11 @@ Then, type the following in a Moodle resource, substituting the dataId (?d=N):
 
 Notes
 -----
+* mod/data: If the start and end dates for a timeline will be less than ~2000
+ (or > ?), then they need to be text, not date fields in the Database activity.
+* mod/data: If PHP < 5.2, then dates less than ~1970 should be written as 
+ ISO 8601 dates (2010-11-06T14:11..). If PHP >= 5.2 then date_parse handles
+ '6 November 2010...'.
 * The filter currently creates a very simple timeline, with only one band!
 * There is a skip-link for accessibility.
 * Todo: internationalize text strings.

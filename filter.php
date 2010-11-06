@@ -6,10 +6,10 @@
  * Uses: MIT SIMILE; also, parse_ini_string function (compat.php).
  *
  * @category  Moodle4-9
- * @author    N.D.Freear, 23 October 2010.
+ * @author    Nick Freear <nfreear @ yahoo.co.uk>
  * @copyright Copyright (c) 2010 Nicholas Freear.
  * @license   http://gnu.org/copyleft/gpl.html
- * @link      http://freear.org.uk/moodle/
+ * @link      http://freear.org.uk/#moodle
  *
  * @copyright Copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
  * @license   http://opensource.org/licenses/bsd-license.php
@@ -123,20 +123,14 @@ EOS;
 EOS;
         $alt_link = <<<EOS
     <p class="tl-widget-alt mod-data" id="tl-widget-end"
-    style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:28px;"><a href=
+    style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:24px;"><a href=
     "$CFG->wwwroot/mod/data/view.php?d=$config->dataId"  title="Data source">$config->title</a></p>
 EOS;
-    } else {
+    } else { //Error.
         echo "Error, either 'dataUrl' (XML) or 'dataId' (JSON) is required.";
     }
 
-    // For now, we embed the Javascript inline. 
-/*<style>
- .simileAjax-bubble-container{width:350px !important;}
- .simileAjax-bubble-container h3{font-size:.95em; font-weight:normal;}
- .simileAjax-bubble-contentContainer, .timeline-event-bubble-body{width:350px !important;}
- .timeline-event-bubble-image{position:relative; left:80px !important;}
-</style>*/
+    // For now, we embed the Javascript inline.
     $newtext = <<<EOF
 
 <style>
@@ -173,7 +167,6 @@ $js_load
 }
 var resizeTimerID = null;
 function onResize() {
-  //alert('resize');
     if (resizeTimerID == null) {
         resizeTimerID = window.setTimeout(function() {
 
@@ -184,7 +177,6 @@ function onResize() {
 }
 
 YAHOO.util.Event.onDOMReady(window.setTimeout(onLoad, 500));
-//window.onload = onLoad;
 window.onresize = onResize;
 </script>
 
