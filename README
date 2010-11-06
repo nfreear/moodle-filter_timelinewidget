@@ -4,7 +4,8 @@ Timeline Widget filter
 ======================
 
 A Moodle filter to embed an MIT SIMILE Timeline Javascript interactive widget.
-You and your class can use it to visualize temporal/ historical data.
+You and your class can use it to visualize temporal/ historical data. The data
+source can be a static XML file, or a dynamic Moodle Database activity.
 
 Requirements: tested with Moodle 1.9.7 (all Moodle 1.9.x should work, Moodle 2.x may work- let me know).
 
@@ -51,8 +52,9 @@ Then, type the following in a Moodle resource, substituting the dataId (?d=N):
 
 Notes
 -----
-* The filter creates a very simple timeline, with only one band!
-* In the near future, I plan to allow dynamic timeline generation from a Moodle Database activity.
+* The filter currently creates a very simple timeline, with only one band!
+* There is a skip-link for accessibility.
+* Todo: internationalize text strings.
 
 Credits
 -------
