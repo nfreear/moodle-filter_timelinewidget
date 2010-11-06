@@ -23,31 +23,31 @@ Usage
 Then, type the following in Moodle's rich-editor (note, line-breaks, which can
 be represented by &lt;br /> are required):
 
-    [Timeline]
-    ; A comment.
-    title  = Important inventions
-    dataUrl= /moodle/file.php/2/simile-invent.xml
-    ; The date on which to centre the timeline initially. This can
-    ; be just a year, or a full date, eg. 20 January 1870.
-    date   = 1870
-    ; UPPER-CASE! minute,hour,day,week,month,year,decade,century,millenium.
-    intervalUnit  = CENTURY
-    ; How wide should the unit defined above be? In pixels.
-    intervalPixels= 75
-    [/Timeline]
+        [Timeline]
+        ; A comment.
+        title  = Important inventions
+        dataUrl= /moodle/file.php/2/simile-invent.xml
+        ; The date on which to centre the timeline initially. This can
+        ; be just a year, or a full date, eg. 20 January 1870.
+        date   = 1870
+        ; UPPER-CASE! minute,hour,day,week,month,year,decade,century,millenium.
+        intervalUnit  = CENTURY
+        ; How wide should the unit defined above be? In pixels.
+        intervalPixels= 75
+        [/Timeline]
 
 2.  mod/data: Create a Moodle Database activity, with fields named  'start' (date),
- 'end' (date), 'title', 'description', 'image' and 'link', and add a record.
- Then, type the following in a Moodle resource:
+'end' (date), 'title', 'description', 'image' and 'link', and add a record.
+Then, type the following in a Moodle resource, substituting the dataId (?d=N):
 
-    [Timeline]
-    ;title = Important inventions
-    dataSrc= mod/data
-    dataId = 4
-    date   = 1870
-    intervalUnit  = CENTURY
-    intervalPixels= 75
-    [/Timeline]
+        [Timeline]
+        ;title = Important inventions
+        dataSrc= mod/data
+        dataId = 4
+        date   = 1870
+        intervalUnit  = CENTURY
+        intervalPixels= 75
+        [/Timeline]
 
 Notes
 -----
