@@ -94,9 +94,7 @@ function _timeline_filter_callback($matches_ini) {
     $config = (object) array_merge($defaults, $config);
 
     // We probably should check types here too.
-    if (!isset($config->dataUrl)) {
-        echo "Error, missing 'dataUrl'";
-    }
+
     if (!isset($config->date)) {
         echo "Error, missing 'date'";
     }
@@ -107,7 +105,36 @@ function _timeline_filter_callback($matches_ini) {
     $yui_root= "$CFG->wwwroot/lib/yui";
     $tl_root = "$CFG->wwwroot/filter/timelinewidget";
 
+    $js_load = $alt_link = NULL;
+    if (isset($config->dataUrl)) { //XML.
+        $js_load = <<<EOS
+    tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
+            function(xml, url) { eventSource.loadXML(xml, url); });
+EOS;
+        $alt_link = <<<EOS
+    <p class="tl-widget-alt xml" style="background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;"><a href="$config->dataUrl" type="application/xml" title="XML timeline data">$config->title<abbr class="accesshide"> XML</abbr></a></p>
+EOS;
+    }
+    elseif (isset($config->dataId)) { //JSON.
+        $js_load = <<<EOS
+    tl.loadJSON("$tl_root/json.php?mid=$config->dataId&r="+ (new Date().getTime()),
+            function(json, url) { eventSource.loadJSON(json, url); });
+EOS;
+        $alt_link = <<<EOS
+    <p class="tl-widget-alt mod-data" style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:28px;"><a href=
+    "$CFG->wwwroot/mod/data/view.php?d=$config->dataId"  title="Data source">$config->title</a></p>
+EOS;
+    } else {
+        echo "Error, either 'dataUrl' (XML) or 'dataId' (JSON) is required.";
+    }
+
     // For now, we embed the Javascript inline. 
+/*<style>
+ .simileAjax-bubble-container{width:350px !important;}
+ .simileAjax-bubble-container h3{font-size:.95em; font-weight:normal;}
+ .simileAjax-bubble-contentContainer, .timeline-event-bubble-body{width:350px !important;}
+ .timeline-event-bubble-image{position:relative; left:80px !important;}
+</style>*/
     $newtext = <<<EOF
 
 <script type="text/javascript">
@@ -133,8 +160,9 @@ function onLoad() {
      }),
    ];
 
-   tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
-   Timeline.loadXML("$config->dataUrl", function(xml, url) { eventSource.loadXML(xml, url); });
+    tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
+$js_load
+
 }
 var resizeTimerID = null;
 function onResize() {
@@ -155,7 +183,7 @@ window.onresize = onResize;
 
 <div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc"></div>
 
-<p class="tl-widget-alt"><a href="$config->dataUrl" type="application/xml" title="XML">$config->title<span> (XML)</span></a></p>
+$alt_link
 
 EOF;
     return $newtext;
