@@ -7,11 +7,11 @@
  *
  * @category  Moodle4-9
  * @author    Nick Freear <nfreear @ yahoo.co.uk>
- * @copyright Copyright (c) 2010 Nicholas Freear.
- * @license   http://gnu.org/copyleft/gpl.html
+ * @copyright (c) 2010 Nicholas Freear {@link http://freear.org.uk}.
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v2 or later
  * @link      http://freear.org.uk/#moodle
  *
- * @copyright Copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
+ * @copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
  * @license   http://opensource.org/licenses/bsd-license.php
  * @link      http://simile.mit.edu/
  */
@@ -34,7 +34,12 @@ intervalPixels= 75
 
 
 NOTE. Why the square bracket/INI-file syntax above?
-  A good question! I am initially writing this filter for use by teachers who may be fairly non-technical. So, after some deliberation, I chose something that was as 'clean' and readable as possible, could not be confused with HTML and can easily be entered in a WYSIWYG editor in Moodle. The downsides are that line-breaks (which can be <br>, <br />) are required, and if you disable the filter, you're left with 'weird' square brackets.
+  A good question! I am initially writing this filter for use by teachers who
+may be fairly non-technical. So, after some deliberation, I chose something
+that was as 'clean' and readable as possible, could not be confused with HTML
+and can easily be entered in a WYSIWYG editor in Moodle. The downsides are that
+line-breaks (which can be <br>, <br />) are required, and if you disable the
+filter, you're left with 'weird' square brackets.
 */
 
 //  This filter will replace any [Timeline] OPTIONS [/Timeline] with
