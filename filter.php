@@ -112,6 +112,7 @@ function _timeline_filter_callback($matches_ini) {
 
     $js_load = $alt_link = NULL;
     if (isset($config->dataUrl)) { //XML.
+        $label = get_string('xmltimelinedata', 'filter_timeline');
         $js_load = <<<EOS
     tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
             function(xml, url) { eventSource.loadXML(xml, url); });
