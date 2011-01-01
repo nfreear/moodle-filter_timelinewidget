@@ -112,7 +112,13 @@ function _timeline_filter_callback($matches_ini) {
 
     $js_load = $alt_link = NULL;
     if (isset($config->dataUrl)) { //XML.
-        $label = get_string('xmltimelinedata', 'filter_timeline');
+        // Handle relative URLs. They must start with a course ID, eg. '2/timeline-invent.xml'
+        if (0!==strpos($config->dataUrl, '/')
+          && 0!==stripos($config->dataUrl, 'http://')) {
+          $config->dataUrl = "$CFG->wwwroot/file.php/$config->dataUrl";
+        }
+        debugging($config->dataUrl);
+        //$label = get_string('xmltimelinedata', 'filter_timeline');
         $js_load = <<<EOS
     tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
             function(xml, url) { eventSource.loadXML(xml, url); });
