@@ -13,23 +13,25 @@ Uses:  MIT SIMILE (v2.3.0); also, `parse_ini_string` function (see compat.php).
 
 Installation
 ------------ 
-1. Download and unzip the code files. Copy the `timelinewidget` directory to the `filter` directory on the server,
+1. Download and uncompress the code files. Copy the `timelinewidget` directory to the `filter` directory on the server,
    eg. `/var/www/moodle/filter/timelinewidget/`
 2. Log in to Moodle as admin, visit Site Administration | Modules | Filters |
  Manage Filters. Scroll down and click on the icon for Timelinewidget to enable it.
-3. Try one of the Usage examples below (see the XML file in `timelinewidget/example`).
+3. Try one of the Usage examples below.
 
 Usage
 -----
-1. XML: Upload a timeline XML file to your course (see 'example' directory). 
+Try one of the two modes:
+
+1. **XML**: Upload a timeline XML file to your course (see the `example` directory).
 Then, type the following in Moodle's rich-editor (note, line-breaks, which can
-be represented by `&lt;br />` are required). Substitute an appropriate integer
+be represented by `<br />` are required). Substitute an appropriate integer
 in place of `COURSE_ID` and adjust the other parameters as needed:
 
         [Timeline]
         ; A comment.
         title  = Important inventions
-        dataUrl= COURSE_ID/simile-invent.xml
+        dataUrl= **COURSE_ID**/simile-invent.xml
         ; The date on which to centre the timeline initially. This can
         ; be just a year, or a full date, eg. 20 January 1870.
         date   = 1870
@@ -39,15 +41,15 @@ in place of `COURSE_ID` and adjust the other parameters as needed:
         intervalPixels= 75
         [/Timeline]
 
-2.  mod/data: Create a Moodle Database activity, with fields named  'start' (date),
-'end' (date), 'title', 'description', 'image' and 'link', and add a record.
+2. **mod/data**: Create a Moodle Database activity, with fields named  'start'
+(date), 'end' (date), 'title', 'description', 'image' and 'link', and add a record.
 Then, type the following in a Moodle resource, substituting an appropriate
 integer in place of `DATA_ID` (`mod/data/view.php?d=N`):
 
         [Timeline]
         ;title = Important inventions
         dataSrc= mod/data
-        dataId = DATA_ID
+        dataId = **DATA_ID**
         date   = 1870
         intervalUnit  = CENTURY
         intervalPixels= 75
