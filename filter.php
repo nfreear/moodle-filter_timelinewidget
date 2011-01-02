@@ -92,16 +92,15 @@ function _timeline_filter_callback($matches_ini) {
 
     // For PHP < 5.3, do late loading of this compatibility library.
     if (!function_exists('parse_ini_string')) {
-        require_once($CFG->libdir.'/../filter/timelinewidget/compat.php');
+        require_once $CFG->dirroot.'/filter/timelinewidget/compat.php';
     }
 
     $config = parse_ini_string($config);
     $config = (object) array_merge($defaults, $config);
 
     // We probably should check types here too.
-
     if (!isset($config->date)) {
-        echo "Error, missing 'date'";
+        print_error('errormissingdate', 'filter_timelinewidget');
     }
 
     // Problems with require_js and caching :( - hard-code YUI scripts below.
@@ -140,17 +139,18 @@ EOS;
     "$CFG->wwwroot/mod/data/view.php?d=$config->dataId" title="$label">$config->title</a></p>
 EOS;
     } else { //Error.
-        echo "Error, either 'dataUrl' (XML) or 'dataId' (JSON) is required.";
+        print_error('errordataurloridrequired', 'filter_timelinewidget');
     }
 
     // For now, we embed the Javascript inline.
+    $skip_label = get_string('skiplink', 'filter_timelinewidget');
     $newtext = <<<EOF
 
 <style>
 .tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
 .tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}
 </style>
-<a href="#tl-widget-end" class="tl-widget-skip">Skip over the timeline widget.</a>
+<a href="#tl-widget-end" class="tl-widget-skip">$skip_label</a>
 <script type="text/javascript">
 var Timeline_ajax_url ="$tl_root/timeline_ajax/simile-ajax-api.js";
 var Timeline_urlPrefix="$tl_root/timeline_js/";
@@ -193,7 +193,7 @@ YAHOO.util.Event.onDOMReady(window.setTimeout(onLoad, 500));
 window.onresize = onResize;
 </script>
 
-<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc"></div>
+<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;"></div>
 
 $alt_link
 

@@ -8,5 +8,9 @@
  */
 $string['filtername']     = 'Timeline Widget';
 
+$string['errordataurloridrequired'] =
+    "Error, either 'dataUrl' (XML) or 'dataId' (JSON) is required.";
+$string['errormissingdate']="Error, missing 'date' parameter.";
 $string['datasource']     = 'Data source';
 $string['xmltimelinedata']= 'XML timeline data';
+$string['skiplink']       = 'Skip over the timeline widget.';
