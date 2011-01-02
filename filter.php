@@ -22,7 +22,7 @@
 [Timeline]
 ; A comment.
 title  = Important inventions timeline
-dataUrl= /moodle/file.php/2/simile-invent.xml
+dataUrl= {COURSE_ID}/simile-invent.xml
 ; The date on which to centre the timeline initially. This can
 ; be just a year, or a full date, eg. 20 January 1870.
 date   = 1870
@@ -58,8 +58,8 @@ filter, you're left with 'weird' square brackets.
 function timelinewidget_filter($courseid, $text) {
     static $filter_count = 0;
 
-    if (!is_string($text) || $filter_count > 3) { #0
-        // non string data can not be filtered anyway
+    if (!is_string($text)) {
+        // non string data can not be filtered anyway (and don't use $filter_count).
         return $text;
     }
     // Copy the input text. Fullclone is slow and not needed here
@@ -85,7 +85,7 @@ function _timeline_filter_callback($matches_ini) {
     $intervals = 'minute,hour,day,week,month,year,decade,century,millenium';
     $intervals = strtoupper(str_replace(',', '|', $intervals));
 
-    $defaults = array('id'=>'tl', 'title'=>'My timeline',);
+    $defaults = array('id'=>'tlw0', 'title'=>'My timeline',);
 
     // Tidy up after WYSIWYG editors - line breaks matter.
     $config = trim(str_ireplace(array('<br>', '<br />'), "\n", $matches_ini[1]));
@@ -193,7 +193,7 @@ YAHOO.util.Event.onDOMReady(window.setTimeout(onLoad, 500));
 window.onresize = onResize;
 </script>
 
-<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;"></div>
+<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;">The Timeline widget requires Javascript to be enabled.</div>
 
 $alt_link
 
