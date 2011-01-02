@@ -13,21 +13,23 @@ Uses:  MIT SIMILE (v2.3.0); also, `parse_ini_string` function (see compat.php).
 
 Installation
 ------------ 
-1. Download and unzip the code files. Copy to the directory on the server,
+1. Download and unzip the code files. Copy the `timelinewidget` directory to the `filter` directory on the server,
    eg. `/var/www/moodle/filter/timelinewidget/`
 2. Log in to Moodle as admin, visit Site Administration | Modules | Filters |
  Manage Filters. Scroll down and click on the icon for Timelinewidget to enable it.
+3. Try one of the Usage examples below (see the XML file in `timelinewidget/example`).
 
 Usage
 -----
 1. XML: Upload a timeline XML file to your course (see 'example' directory). 
 Then, type the following in Moodle's rich-editor (note, line-breaks, which can
-be represented by &lt;br /> are required):
+be represented by `&lt;br />` are required). Substitute an appropriate integer
+in place of `COURSE_ID` and adjust the other parameters as needed:
 
         [Timeline]
         ; A comment.
         title  = Important inventions
-        dataUrl= /moodle/file.php/2/simile-invent.xml
+        dataUrl= COURSE_ID/simile-invent.xml
         ; The date on which to centre the timeline initially. This can
         ; be just a year, or a full date, eg. 20 January 1870.
         date   = 1870
@@ -39,12 +41,13 @@ be represented by &lt;br /> are required):
 
 2.  mod/data: Create a Moodle Database activity, with fields named  'start' (date),
 'end' (date), 'title', 'description', 'image' and 'link', and add a record.
-Then, type the following in a Moodle resource, substituting the dataId (?d=N):
+Then, type the following in a Moodle resource, substituting an appropriate
+integer in place of `DATA_ID` (`mod/data/view.php?d=N`):
 
         [Timeline]
         ;title = Important inventions
         dataSrc= mod/data
-        dataId = 4
+        dataId = DATA_ID
         date   = 1870
         intervalUnit  = CENTURY
         intervalPixels= 75
@@ -52,6 +55,7 @@ Then, type the following in a Moodle resource, substituting the dataId (?d=N):
 
 Notes
 -----
+* Todo: test that the filter works with Moodle 2.0.
 * mod/data: If the start and end dates for a timeline will be less than ~2000
  (or > ?), then they need to be text, not date fields in the Database activity.
 * mod/data: If PHP < 5.2, then dates less than ~1970 should be written as 
@@ -59,7 +63,7 @@ Notes
  '6 November 2010...'.
 * The filter currently creates a very simple timeline, with only one band!
 * There is a skip-link for accessibility.
-* Todo: internationalize text strings.
+* The filter is internationalized and (mostly) Moodle 2 ready.
 
 Credits
 -------
