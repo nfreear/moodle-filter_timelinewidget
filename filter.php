@@ -118,17 +118,18 @@ function _timeline_filter_callback($matches_ini) {
           $config->dataUrl = "$CFG->wwwroot/file.php/$config->dataUrl";
         }
         debugging($config->dataUrl);
-        //$label = get_string('xmltimelinedata', 'filter_timeline');
+        $label = get_string('xmltimelinedata', 'filter_timelinewidget');
         $js_load = <<<EOS
     tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
             function(xml, url) { eventSource.loadXML(xml, url); });
 EOS;
         $alt_link = <<<EOS
     <p class="tl-widget-alt xml" id="tl-widget-end"
-    style="background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;"><a href="$config->dataUrl" type="application/xml" title="XML timeline data">$config->title<abbr class="accesshide"> XML</abbr></a></p>
+    style="background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;"><a href="$config->dataUrl" type="application/xml" title="$label">$config->title<abbr class="accesshide"> XML</abbr></a></p>
 EOS;
     }
     elseif (isset($config->dataId)) { //JSON.
+        $label = get_string('datasource', 'filter_timelinewidget');
         $js_load = <<<EOS
     tl.loadJSON("$tl_root/json.php?mid=$config->dataId&r="+ (new Date().getTime()),
             function(json, url) { eventSource.loadJSON(json, url); });
@@ -136,7 +137,7 @@ EOS;
         $alt_link = <<<EOS
     <p class="tl-widget-alt mod-data" id="tl-widget-end"
     style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:24px;"><a href=
-    "$CFG->wwwroot/mod/data/view.php?d=$config->dataId"  title="Data source">$config->title</a></p>
+    "$CFG->wwwroot/mod/data/view.php?d=$config->dataId" title="$label">$config->title</a></p>
 EOS;
     } else { //Error.
         echo "Error, either 'dataUrl' (XML) or 'dataId' (JSON) is required.";
