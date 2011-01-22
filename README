@@ -26,7 +26,13 @@ Try one of the two modes:
 1. **XML**: Upload a timeline XML file to your course (see the `example` directory).
 Then, type the following in a resource using Moodle's rich-editor (note,
 line-breaks, which can be represented by `<br />` are required). Substitute an
-appropriate integer in place of `COURSE_ID` and adjust the other parameters as needed:
+appropriate integer in place of `COURSE_ID` and adjust the other parameters as needed. Minimal syntax:
+
+        [Timeline]
+        dateUrl = COURSE_ID/simile-invent.xml
+        [/Timeline]
+
+You will probably wish to replace the defaults for `title`, `date` and so on:
 
         [Timeline]
         ; A comment.
@@ -69,7 +75,7 @@ Notes
 
 Credits
 -------
-Filter. Copyright (c) 2010 Nicholas Freear.
+Filter. Copyright (c) 2010-2011 Nicholas Freear.
 
 *  License <http://gnu.org/copyleft/gpl.html>
 *  <http://freear.org.uk/#moodle>
