@@ -85,11 +85,13 @@ function _timeline_filter_callback($matches_ini) {
     $intervals = 'minute,hour,day,week,month,year,decade,century,millenium';
     $intervals = strtoupper(str_replace(',', '|', $intervals));
 
+    // Reasonable defaults? (Was: date=2000; CENTURY; intervalPixels=75)
     $defaults = array(
         'id'=>'tlw0',
         'title'=>get_string('defaulttitle', 'filter_timelinewidget'),
-        'intervalUnit'=>'CENTURY',
-        'intervalPixels'=>75);
+        'date' =>1900,
+        'intervalUnit'=>'DECADE',
+        'intervalPixels'=>35);
 
     // Tidy up after WYSIWYG editors - line breaks matter.
     $config = trim(str_ireplace(array('<br>', '<br />'), "\n", $matches_ini[1]));
@@ -152,6 +154,7 @@ EOS;
     $newtext = <<<EOF
 
 <style>
+.timeline-date-label{font-size:.94em;}
 .tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
 .tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}
 </style>
