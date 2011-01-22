@@ -123,7 +123,7 @@ function _timeline_filter_callback($matches_ini) {
         debugging($config->dataUrl, DEBUG_DEVELOPER);
         $label = get_string('xmltimelinedata', 'filter_timelinewidget');
         $js_load = <<<EOS
-    tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
+    TLW.tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
             function(xml, url) { eventSource.loadXML(xml, url); });
 EOS;
         $alt_link = <<<EOS
@@ -134,7 +134,7 @@ EOS;
     elseif (isset($config->dataId)) { //JSON.
         $label = get_string('datasource', 'filter_timelinewidget');
         $js_load = <<<EOS
-    tl.loadJSON("$tl_root/json.php?mid=$config->dataId&r="+ (new Date().getTime()),
+    TLW.tl.loadJSON("$tl_root/json.php?mid=$config->dataId&r="+ (new Date().getTime()),
             function(json, url) { eventSource.loadJSON(json, url); });
 EOS;
         $alt_link = <<<EOS
@@ -164,8 +164,9 @@ var Timeline_parameters="bundle=true";
 <script src="$yui_root/yahoo/yahoo-min.js" type="text/javascript"></script>
 <script src="$yui_root/event/event-min.js" type="text/javascript"></script>
 <script type="text/javascript">
-var tl;
-function onLoad() {
+var TLW= TLW || {};
+TLW.tl = null;
+TLW.onLoad = function() {
     var eventSource = new Timeline.DefaultEventSource();
     var d = Timeline.DateTime.parseGregorianDateTime("$config->date");
     var bandInfos = [
@@ -178,22 +179,21 @@ function onLoad() {
         }) //Was: , bug (MSIE).
     ];
 
-    tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
+    TLW.tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
 $js_load
 
-}
-var resizeTimerID = null;
-function onResize() {
-    if (resizeTimerID === null) {
-        resizeTimerID = window.setTimeout(function() {
-            resizeTimerID = null;
-            tl.layout();
+};
+TLW.resizeTimer = null;
+TLW.onResize = function() {
+    if (TLW.resizeTimer === null) {
+        TLW.resizeTimer = window.setTimeout(function() {
+            TLW.resizeTimer = null;
+            TLW.tl.layout();
         }, 500); //milliseconds.
     }
-}
-
-YAHOO.util.Event.onDOMReady(window.setTimeout(onLoad, 500));
-window.onresize = onResize;
+};
+YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 500));
+window.onresize = TLW.onResize;
 </script>
 
 <div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;">The Timeline widget requires Javascript to be enabled.</div>
