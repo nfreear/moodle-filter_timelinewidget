@@ -180,7 +180,7 @@ $js_load
 }
 var resizeTimerID = null;
 function onResize() {
-    if (resizeTimerID == null) {
+    if (resizeTimerID === null) {
         resizeTimerID = window.setTimeout(function() {
             resizeTimerID = null;
             tl.layout();
