@@ -25,7 +25,7 @@ Try one of the two modes:
 
 1. **XML**: Upload a timeline XML file to your course (see the `example` directory).
 Then, type the following in a resource using Moodle's rich-editor (note,
-line-breaks, which canbe represented by `<br />` are required). Substitute an
+line-breaks, which can be represented by `<br />` are required). Substitute an
 appropriate integer in place of `COURSE_ID` and adjust the other parameters as needed:
 
         [Timeline]
