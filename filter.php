@@ -116,7 +116,7 @@ function _timeline_filter_callback($matches_ini) {
           && 0!==stripos($config->dataUrl, 'http://')) {
           $config->dataUrl = "$CFG->wwwroot/file.php/$config->dataUrl";
         }
-        debugging($config->dataUrl);
+        debugging($config->dataUrl, DEBUG_DEVELOPER);
         $label = get_string('xmltimelinedata', 'filter_timelinewidget');
         $js_load = <<<EOS
     tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
@@ -171,7 +171,7 @@ function onLoad() {
          width:          "100%", //"70%", 
          intervalUnit:   Timeline.DateTime.$config->intervalUnit, 
          intervalPixels: $config->intervalPixels
-     }),
+     }) //MSIE bug ','
    ];
 
     tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
