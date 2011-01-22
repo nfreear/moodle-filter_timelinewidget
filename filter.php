@@ -87,7 +87,7 @@ function _timeline_filter_callback($matches_ini) {
 
     $defaults = array(
         'id'=>'tlw0',
-        'title'=>'My timeline',
+        'title'=>get_string('defaulttitle', 'filter_timelinewidget'),
         'intervalUnit'=>'CENTURY',
         'intervalPixels'=>75);
 
@@ -148,6 +148,7 @@ EOS;
 
     // For now, we embed the Javascript inline.
     $skip_label = get_string('skiplink', 'filter_timelinewidget');
+    $noscript= get_string('noscript', 'filter_timelinewidget');
     $newtext = <<<EOF
 
 <style>
@@ -196,7 +197,7 @@ YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 500));
 window.onresize = TLW.onResize;
 </script>
 
-<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;">The Timeline widget requires Javascript to be enabled.</div>
+<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;">$noscript</div>
 
 $alt_link
 
