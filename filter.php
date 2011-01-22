@@ -162,17 +162,17 @@ var Timeline_parameters="bundle=true";
 <script type="text/javascript">
 var tl;
 function onLoad() {
-   var eventSource = new Timeline.DefaultEventSource();
-   var d = Timeline.DateTime.parseGregorianDateTime("$config->date");
-   var bandInfos = [
-     Timeline.createBandInfo({
-         eventSource:    eventSource,
-         date:           d,
-         width:          "100%", //"70%", 
-         intervalUnit:   Timeline.DateTime.$config->intervalUnit, 
-         intervalPixels: $config->intervalPixels
-     }) //MSIE bug ','
-   ];
+    var eventSource = new Timeline.DefaultEventSource();
+    var d = Timeline.DateTime.parseGregorianDateTime("$config->date");
+    var bandInfos = [
+        Timeline.createBandInfo({
+            eventSource:    eventSource,
+            date:           d,
+            width:          "100%", //"70%",
+            intervalUnit:   Timeline.DateTime.$config->intervalUnit,
+            intervalPixels: $config->intervalPixels
+        }) //Was: , bug (MSIE).
+    ];
 
     tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
 $js_load
@@ -182,9 +182,8 @@ var resizeTimerID = null;
 function onResize() {
     if (resizeTimerID == null) {
         resizeTimerID = window.setTimeout(function() {
-
-        resizeTimerID = null;
-        tl.layout();
+            resizeTimerID = null;
+            tl.layout();
         }, 500); //milliseconds.
     }
 }
