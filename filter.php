@@ -85,7 +85,11 @@ function _timeline_filter_callback($matches_ini) {
     $intervals = 'minute,hour,day,week,month,year,decade,century,millenium';
     $intervals = strtoupper(str_replace(',', '|', $intervals));
 
-    $defaults = array('id'=>'tlw0', 'title'=>'My timeline',);
+    $defaults = array(
+        'id'=>'tlw0',
+        'title'=>'My timeline',
+        'intervalUnit'=>'CENTURY',
+        'intervalPixels'=>75);
 
     // Tidy up after WYSIWYG editors - line breaks matter.
     $config = trim(str_ireplace(array('<br>', '<br />'), "\n", $matches_ini[1]));
