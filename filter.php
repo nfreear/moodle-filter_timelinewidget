@@ -118,10 +118,24 @@ function _timeline_filter_callback($matches_ini) {
 
     $js_load = $alt_link = NULL;
     if (isset($config->dataUrl)) { //XML.
-        // Handle relative URLs. They must start with a course ID, eg. '2/timeline-invent.xml'
+        // Handle relative URLs. They must start with a course/resource ID, eg. '2/timeline-invent.xml'
         if (0!==strpos($config->dataUrl, '/')
           && 0!==stripos($config->dataUrl, 'http://')) {
-          $config->dataUrl = "$CFG->wwwroot/file.php/$config->dataUrl";
+          if (file_exists("$CFG->dirroot/draftfile.php")) {
+              // Moodle 2.x.
+              if (preg_match('#\d+\/[a-z_]+\/content\/\d+\/.+\.#', $config->dataUrl)) {
+                //dataUrl = 60/mod_resource/content/1/simile-invent.xml
+                $config->dataUrl="$CFG->wwwroot/pluginfile.php/$config->dataUrl";
+              }
+              elseif (preg_match('#\d+\/user\/draft\/\d+\/.+\.#', $config->dataUrl)) {
+                //dataUrl = 14/user/draft/403117530/simile-invent.xml
+                $config->dataUrl="$CFG->wwwroot/draftfile.php/$config->dataUrl";
+              } else {
+                  print_error('errorindataurl', 'filter_timelinewidget');
+              }
+          } else { // Moodle 1.8-1.9.x
+              $config->dataUrl = "$CFG->wwwroot/file.php/$config->dataUrl";
+          }
         }
         debugging($config->dataUrl, DEBUG_DEVELOPER);
         $label = get_string('xmltimelinedata', 'filter_timelinewidget');
