@@ -94,7 +94,8 @@ function _timeline_filter_callback($matches_ini) {
         'intervalPixels'=>35);
 
     // Tidy up after WYSIWYG editors - line breaks matter.
-    $config = trim(str_ireplace(array('<br>', '<br />'), "\n", $matches_ini[1]));
+    $config = trim(str_ireplace(array('<br>', '<br />', '<p>'), "\n", $matches_ini[1]));
+    $config = str_ireplace('</p>', '', $config);
 
     // For PHP < 5.3, do late loading of this compatibility library.
     if (!function_exists('parse_ini_string')) {
