@@ -113,7 +113,13 @@ function _timeline_filter_callback($matches_ini) {
     // Problems with require_js and caching :( - hard-code YUI scripts below.
     //require_js(array('yui_yahoo', 'yui_event'));
 
-    $yui_root= "$CFG->wwwroot/lib/yui";
+    if (file_exists("$CFG->dirroot/lib/yui/2.8.2/build")) {
+        // Moodle 2.x.
+        $yui_root= "$CFG->wwwroot/lib/yui/2.8.2/build";
+    } else {
+        // Or Moodle 1.9.x
+        $yui_root= "$CFG->wwwroot/lib/yui";
+    }
     $tl_root = "$CFG->wwwroot/filter/timelinewidget";
 
     $js_load = $alt_link = NULL;
@@ -211,7 +217,7 @@ TLW.onResize = function() {
         }, 500); //milliseconds.
     }
 };
-YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 500));
+YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 2000)); //500.
 window.onresize = TLW.onResize;
 </script>
 
