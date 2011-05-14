@@ -3,19 +3,17 @@
 Timeline Widget filter
 ======================
 
-A Moodle filter to embed an MIT SIMILE Timeline Javascript interactive widget.
-You and your class can use it to visualize temporal/ historical data. The data
-source can be a static XML file, or a dynamic Moodle Database activity.
+A filter to embed an MIT SIMILE Timeline Javascript interactive widget. You and your class can use it to visualize temporal/ historical data. The data source can be a static XML file, or a dynamic Moodle Database activity (currently Moodle 1.9 only).
 
-Requirements: tested with Moodle 1.9.7 (all Moodle 1.9.x should work, Moodle 2.x may work- let me know).
+Requirements: tested with Moodle 1.9.7 and 2.0.2 (all Moodle 1.9.x should work, Moodle 2.0.x - static XML only).
 
-Uses:  MIT SIMILE (v2.3.0); Javascript; also, `parse_ini_string` function (see compat.php).
+Uses: MIT SIMILE (v2.3.0 included); Javascript; also, `parse_ini_string` function (see compat.php).
 
 Installation
 ------------ 
-1. Download and uncompress the code files. Copy the `timelinewidget` directory to the `filter` directory on the server,
+1. Download and uncompress the code files. Copy the renamed `timelinewidget` directory to the `filter` directory on the server,
    eg. `/var/www/moodle/filter/timelinewidget/`
-2. Log in to Moodle as admin, visit Site Administration | Modules | Filters |
+2. Log in to Moodle as admin, visit Site Administration | Plugins | Filters |
  Manage Filters. Scroll down and click on the icon for Timelinewidget to enable it.
 3. Try one of the Usage examples below.
 
@@ -61,9 +59,19 @@ integer in place of `DATA_ID` (`mod/data/view.php?d=N`):
         intervalPixels= 75
         [/Timeline]
 
+Links
+-----
+* Moodle plugin page: <http://moodle.org/mod/data/view.php?rid=4802>
+* Bugs: <http://tracker.moodle.org/browse/CONTRIB/component/X-X-X>
+* Code, Git: <https://github.com/nfreear/moodle-filter_timelinewidget>
+* (Code, Hg: <https://bitbucket.org/nfreear/timelinewidget>)
+* Demo: <http://freear.org.uk/moodle>
+
+
 Notes
 -----
-* Todo: test that the filter works with Moodle 2.0.
+* Todo: ensure that the filter works with MSIE (Javascript issues).
+* Todo: ensure that the filter's mod/data mode works with Moodle 2.0.
 * mod/data: If the start and end dates for a timeline will be less than ~2000
  (or > ?), then they need to be text, not date fields in the Database activity.
 * mod/data: If PHP < 5.2, then dates less than ~1970 should be written as 
@@ -78,9 +86,9 @@ Credits
 Filter. Copyright (c) 2010-2011 Nicholas Freear.
 
 *  License <http://gnu.org/copyleft/gpl.html>
-*  <http://freear.org.uk/#moodle>
+*  <http://freear.org.uk/moodle>
 
 SIMILE. Copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
 
 *  License <http://opensource.org/licenses/bsd-license.php>
-*  <http://simile.mit.edu/>
+*  <http://simile.mit.edu>
