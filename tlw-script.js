@@ -1,4 +1,4 @@
-/* Timeline Widget Loader script. */
+/* Timeline Widget include/onResize script. */
 var TLW = TLW || {};
 TLW.include=function(filetype, opts){ //(url,filetype,callback,inner)
   var ref;
@@ -9,8 +9,8 @@ TLW.include=function(filetype, opts){ //(url,filetype,callback,inner)
       ref.src=opts.url; //setAttribute("src", url);
     }
     if(typeof opts.callback!=="undefined"){
-      ref.onreadystatechange=callback;
-      ref.onload=callback;
+      ref.onreadystatechange=opts.callback;
+      ref.onload=opts.callback;
     }
     //ref.id =typeof opts.id!="undefined" ? opts.id : ''; 
     //MSIE bug?
@@ -33,5 +33,15 @@ TLW.include=function(filetype, opts){ //(url,filetype,callback,inner)
   if (typeof ref!=="undefined"){
     //var where = opts.where!=="undefined" ? opts.where : "head";
     document.getElementsByTagName("head")[0].appendChild(ref);
+  }
+};
+TLW.tl = null;
+TLW.resizeTimer = null;
+TLW.onResize = function() {
+  if (TLW.resizeTimer === null) {
+    TLW.resizeTimer = window.setTimeout(function() {
+      TLW.resizeTimer = null;
+      TLW.tl.layout();
+    }, 500); //milliseconds.
   }
 };
