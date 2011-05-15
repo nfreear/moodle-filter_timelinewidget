@@ -14,6 +14,6 @@ $string['errormissingdate']="Error, missing 'date' parameter.";
 $string['datasource']     = 'Data source';
 $string['xmltimelinedata']= 'XML timeline data';
 $string['skiplink']       = 'Skip over the Timeline widget.';
-$string['noscript'] =
-'Try pressing reload in your browser. The Timeline widget requires Javascript to be enabled.';
+$string['loading'] = 'Please wait, the timeline is loading...';
+$string['noscript']= '(Note, the Timeline widget requires Javascript to be enabled.)';
 $string['defaulttitle'] = 'My timeline';

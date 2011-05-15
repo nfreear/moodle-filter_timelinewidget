@@ -171,6 +171,7 @@ EOS;
 
     // For now, we embed the Javascript inline.
     $skip_label = get_string('skiplink', 'filter_timelinewidget');
+    $loading = get_string('loading', 'filter_timelinewidget');
     $noscript= get_string('noscript', 'filter_timelinewidget');
     $newtext = <<<EOF
 
@@ -178,6 +179,7 @@ EOS;
 .timeline-date-label{font-size:.94em;}
 .tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
 .tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}
+.timeline-default p{text-align:center;}
 </style>
 <a href="#tl-widget-end" class="tl-widget-skip">$skip_label</a>
 <script type="text/javascript">
@@ -221,7 +223,7 @@ YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 2000)); //500.
 window.onresize = TLW.onResize;
 </script>
 
-<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;">$noscript</div>
+<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;"><p>$loading</p><p>$noscript</p></div>
 
 $alt_link
 
