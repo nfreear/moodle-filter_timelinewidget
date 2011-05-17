@@ -9,7 +9,7 @@
  * @author    Nick Freear <nfreear @ yahoo.co.uk>
  * @copyright (c) 2010 Nicholas Freear {@link http://freear.org.uk}.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v2 or later
- * @link      http://freear.org.uk/#moodle
+ * @link      http://freear.org.uk/moodle
  *
  * @copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
  * @license   http://opensource.org/licenses/bsd-license.php
@@ -182,17 +182,21 @@ EOS;
 .timeline-default p{text-align:center;}
 </style>
 <a href="#tl-widget-end" class="tl-widget-skip">$skip_label</a>
-<script type="text/javascript">
-var Timeline_ajax_url ="$tl_root/timeline_ajax/simile-ajax-api.js";
-var Timeline_urlPrefix="$tl_root/timeline_js/";
-var Timeline_parameters="bundle=true";
+<script src="$tl_root/tlw-script.js"></script>
+<script>
+/* MSIE fix: Script to load a script...! */
+TLW.config=
+ 'var Timeline_ajax_url ="$tl_root/timeline_ajax/simile-ajax-api.js"; '+
+ 'var Timeline_urlPrefix="$tl_root/timeline_js/"; '+
+ 'var Timeline_parameters="bundle=true";';
+TLW.include('js', {'inner': TLW.config});
 </script>
-<script src="$tl_root/timeline_js/timeline-api.js" type="text/javascript"></script>
+<script>
+TLW.include('js', {'url':'$tl_root/timeline_js/timeline-api.js'});
+</script>
 <script src="$yui_root/yahoo/yahoo-min.js" type="text/javascript"></script>
 <script src="$yui_root/event/event-min.js" type="text/javascript"></script>
 <script type="text/javascript">
-var TLW= TLW || {};
-TLW.tl = null;
 TLW.onLoad = function() {
     var eventSource = new Timeline.DefaultEventSource();
     var d = Timeline.DateTime.parseGregorianDateTime("$config->date");
@@ -210,16 +214,7 @@ TLW.onLoad = function() {
 $js_load
 
 };
-TLW.resizeTimer = null;
-TLW.onResize = function() {
-    if (TLW.resizeTimer === null) {
-        TLW.resizeTimer = window.setTimeout(function() {
-            TLW.resizeTimer = null;
-            TLW.tl.layout();
-        }, 500); //milliseconds.
-    }
-};
-YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 2000)); //500.
+YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 4000)); //500.
 window.onresize = TLW.onResize;
 </script>
 
