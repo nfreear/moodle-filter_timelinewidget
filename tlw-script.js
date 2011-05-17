@@ -23,11 +23,13 @@ TLW.include=function(filetype, opts){ //(url,filetype,callback,inner)
   if (opts.inner!=="undefined"){
     //document.write('iH '+ref.innerHTML+'; iT '+ref.innerText+'; tC '+ref.textContent);//Debug.
 
-    if(ref.innerHTML!=="undefined"){ ref.innerHTML = opts.inner;}//Firefox.
+    var MSIE = -1!==navigator.userAgent.indexOf("MSIE");
+
+    if(MSIE && ref.text!=="undefined")  {ref.text = opts.inner;}
+    else if(ref.innerHTML!=="undefined"){ ref.innerHTML = opts.inner;}//Firefox.
     else if(ref.innerText!=="undefined")  {ref.innerText = opts.inner;}
     else if(ref.textContent!=="undefined"){ref.textContent=opts.inner;}
     else{ ref.appendChild(document.createTextNode(opts.inner));}//Safari.
-    //ref.text = opts.inner;
     //YAHOO.util.Element.setContent(ref, opts.inner);
   }
   if (typeof ref!=="undefined"){
