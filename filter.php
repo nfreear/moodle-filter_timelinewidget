@@ -87,7 +87,7 @@ function _timeline_filter_callback($matches_ini) {
 
     // Reasonable defaults? (Was: date=2000; CENTURY; intervalPixels=75)
     $defaults = array(
-        'id'=>'tlw0',
+        //'id'=>'tlw0',
         'title'=>get_string('defaulttitle', 'filter_timelinewidget'),
         'date' =>1900,
         'intervalUnit'=>'DECADE',
@@ -110,118 +110,60 @@ function _timeline_filter_callback($matches_ini) {
         print_error('errormissingdate', 'filter_timelinewidget');
     }
 
-    // Problems with require_js and caching :( - hard-code YUI scripts below.
-    //require_js(array('yui_yahoo', 'yui_event'));
+    $widget_url = "$CFG->wwwroot/filter/timelinewidget/widget.php?".
+         http_build_query(array('conf' => $config));
 
-    if (file_exists("$CFG->dirroot/lib/yui/2.8.2/build")) {
-        // Moodle 2.x.
-        $yui_root= "$CFG->wwwroot/lib/yui/2.8.2/build";
-    } else {
-        // Or Moodle 1.9.x
-        $yui_root= "$CFG->wwwroot/lib/yui";
-    }
     $tl_root = "$CFG->wwwroot/filter/timelinewidget";
 
     $js_load = $alt_link = NULL;
     if (isset($config->dataUrl)) { //XML.
         // Handle relative URLs. They must start with a course/resource ID, eg. '2/timeline-invent.xml'
-        if (0!==strpos($config->dataUrl, '/')
-          && 0!==stripos($config->dataUrl, 'http://')) {
-          if (file_exists("$CFG->dirroot/draftfile.php")) {
-              // Moodle 2.x.
-              if (preg_match('#\d+\/[a-z_]+\/content\/\d+\/.+\.#', $config->dataUrl)) {
-                //dataUrl = 60/mod_resource/content/1/simile-invent.xml
-                $config->dataUrl="$CFG->wwwroot/pluginfile.php/$config->dataUrl";
-              }
-              elseif (preg_match('#\d+\/user\/draft\/\d+\/.+\.#', $config->dataUrl)) {
-                //dataUrl = 14/user/draft/403117530/simile-invent.xml
-                $config->dataUrl="$CFG->wwwroot/draftfile.php/$config->dataUrl";
-              } else {
-                  print_error('errorindataurl', 'filter_timelinewidget');
-              }
-          } else { // Moodle 1.8-1.9.x
-              $config->dataUrl = "$CFG->wwwroot/file.php/$config->dataUrl";
-          }
-        }
-        debugging($config->dataUrl, DEBUG_DEVELOPER);
+
         $label = get_string('xmltimelinedata', 'filter_timelinewidget');
-        $js_load = <<<EOS
-    TLW.tl.loadXML("$config->dataUrl?"+ (new Date().getTime()),
-            function(xml, url) { eventSource.loadXML(xml, url); });
-EOS;
+
         $alt_link = <<<EOS
-    <p class="tl-widget-alt xml" id="tl-widget-end"
-    style="background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;"><a href="$config->dataUrl" type="application/xml" title="$label">$config->title<abbr class="accesshide"> XML</abbr></a></p>
+    <p class="tl-widget-alt xml" id="tlw-end"><a href=
+    "$config->dataUrl" type="application/xml" title="$label">$config->title<abbr class="accesshide"> XML</abbr></a></p>
 EOS;
     }
     elseif (isset($config->dataId)) { //JSON.
         $label = get_string('datasource', 'filter_timelinewidget');
-        $js_load = <<<EOS
-    TLW.tl.loadJSON("$tl_root/json.php?mid=$config->dataId&r="+ (new Date().getTime()),
-            function(json, url) { eventSource.loadJSON(json, url); });
-EOS;
+
         $alt_link = <<<EOS
-    <p class="tl-widget-alt mod-data" id="tl-widget-end"
-    style="background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:24px;"><a href=
+    <p class="tl-widget-alt mod-data" id="tlw-end"><a href=
     "$CFG->wwwroot/mod/data/view.php?d=$config->dataId" title="$label">$config->title</a></p>
 EOS;
     } else { //Error.
         print_error('errordataurloridrequired', 'filter_timelinewidget');
     }
 
-    // For now, we embed the Javascript inline.
     $skip_label = get_string('skiplink', 'filter_timelinewidget');
-    $loading = get_string('loading', 'filter_timelinewidget');
-    $noscript= get_string('noscript', 'filter_timelinewidget');
     $newtext = <<<EOF
 
 <style>
-.timeline-date-label{font-size:.94em;}
 .tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
 .tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}
-.timeline-default p{text-align:center;}
+.tl-widget-frame{
+  width:99%; height:320px; border:1px solid #ccc; border-radius:4px;
+}
+.tl-widget-alt.xml{
+  background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;
+}
+.tl-widget-alt.mod-data{
+  background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:24px;
+}
 </style>
-<a href="#tl-widget-end" class="tl-widget-skip">$skip_label</a>
-<script src="$tl_root/tlw-script.js"></script>
-<script>
-/* MSIE fix: Script to load a script...! */
-TLW.config=
- 'var Timeline_ajax_url ="$tl_root/timeline_ajax/simile-ajax-api.js"; '+
- 'var Timeline_urlPrefix="$tl_root/timeline_js/"; '+
- 'var Timeline_parameters="bundle=true";';
-TLW.include('js', {'inner': TLW.config});
-</script>
-<script>
-TLW.include('js', {'url':'$tl_root/timeline_js/timeline-api.js'});
-</script>
-<script src="$yui_root/yahoo/yahoo-min.js" type="text/javascript"></script>
-<script src="$yui_root/event/event-min.js" type="text/javascript"></script>
-<script type="text/javascript">
-TLW.onLoad = function() {
-    var eventSource = new Timeline.DefaultEventSource();
-    var d = Timeline.DateTime.parseGregorianDateTime("$config->date");
-    var bandInfos = [
-        Timeline.createBandInfo({
-            eventSource:    eventSource,
-            date:           d,
-            width:          "100%", //"70%",
-            intervalUnit:   Timeline.DateTime.$config->intervalUnit,
-            intervalPixels: $config->intervalPixels
-        }) //Was: , bug (MSIE).
-    ];
 
-    TLW.tl = Timeline.create(document.getElementById("$config->id"), bandInfos);
-$js_load
+  <a href="#tlw-end" class="tl-widget-skip">$skip_label</a>
 
-};
-YAHOO.util.Event.onDOMReady(window.setTimeout(TLW.onLoad, 4000)); //500.
-window.onresize = TLW.onResize;
-</script>
-
-<div id="$config->id" class="timeline-default" style="height:250px; border:1px solid #ccc;"><p>$loading</p><p>$noscript</p></div>
+  <iframe
+    id="tlw0" class="tl-widget-frame" frameborder="0" src=
+  "$widget_url"
+  ></iframe>
 
 $alt_link
 
+$CFG->lang
 EOF;
     return $newtext;
 }
