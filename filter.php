@@ -163,7 +163,6 @@ EOS;
 
 $alt_link
 
-$CFG->lang
 EOF;
     return $newtext;
 }

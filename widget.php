@@ -131,7 +131,7 @@ window.onresize = TLW.onResize;
 EOF;
 
 ?>
-<!DOCTYPE html><html ><meta charset="utf-8"/><title><?php
+<!DOCTYPE html><html <?php echo get_html_lang() ?>><meta charset="utf-8" /><title><?php
   echo $config->title; ?> | <?php echo $filtername; ?></title>
 <style>
 body{margin:0; font:.9em sans-serif;}
