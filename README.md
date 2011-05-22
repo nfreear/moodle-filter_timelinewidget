@@ -27,7 +27,7 @@ line-breaks, which can be represented by `<br />` are required). Substitute an
 appropriate integer in place of `COURSE_ID` and adjust the other parameters as needed. Minimal syntax:
 
         [Timeline]
-        dateUrl = COURSE_ID/simile-invent.xml
+        dataUrl = COURSE_ID/simile-invent.xml
         [/Timeline]
 
 You will probably wish to replace the defaults for `title`, `date` and so on:
@@ -62,8 +62,9 @@ integer in place of `DATA_ID` (`mod/data/view.php?d=N`):
 Links
 -----
 * Moodle plugin page: <http://moodle.org/mod/data/view.php?rid=4802>
-* Bugs: <http://tracker.moodle.org/browse/CONTRIB/component/X-X-X>
+* Discussion: <http://moodle.org/mod/forum/discuss.php?d=175875>
 * Code, Git: <https://github.com/nfreear/moodle-filter_timelinewidget>
+* (Bugs: <http://tracker.moodle.org/browse/CONTRIB/component/X-X-X>)
 * (Code, Hg: <https://bitbucket.org/nfreear/timelinewidget>)
 * Demo: <http://freear.org.uk/moodle>
 
