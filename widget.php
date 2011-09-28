@@ -134,7 +134,7 @@ EOF;
 <!DOCTYPE html><html <?php echo get_html_lang() ?>><meta charset="utf-8" /><title><?php
   echo $config->title; ?> | <?php echo $filtername; ?></title>
 <style>
-body{margin:0; font:.9em sans-serif;}
+body{margin:0; font:.85em sans-serif;}
 .timeline-date-label{font-size:.94em;}
 .tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
 .tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}

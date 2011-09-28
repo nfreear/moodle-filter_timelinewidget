@@ -122,21 +122,22 @@ function _timeline_filter_callback($matches_ini) {
         $label = get_string('xmltimelinedata', 'filter_timelinewidget');
 
         $alt_link = <<<EOS
-    <p class="tl-widget-alt xml" id="tlw-end"><a href=
-    "$config->dataUrl" type="application/xml" title="$label">$config->title<abbr class="accesshide"> XML</abbr></a></p>
+    <a class="tl-widget-alt xml" href=
+    "$config->dataUrl" type="application/xml" title="$label">$config->title<abbr class="accesshide"> XML</abbr></a>
 EOS;
     }
     elseif (isset($config->dataId)) { //JSON.
         $label = get_string('datasource', 'filter_timelinewidget');
 
         $alt_link = <<<EOS
-    <p class="tl-widget-alt mod-data" id="tlw-end"><a href=
-    "$CFG->wwwroot/mod/data/view.php?d=$config->dataId" title="$label">$config->title</a></p>
+    <a class="tl-widget-alt mod-data" href=
+    "$CFG->wwwroot/mod/data/view.php?d=$config->dataId" title="$label">$config->title</a>
 EOS;
     } else { //Error.
         print_error('errordataurloridrequired', 'filter_timelinewidget');
     }
 
+    $newwin_label= 'Open timeline in new window';
     $skip_label = get_string('skiplink', 'filter_timelinewidget');
     $newtext = <<<EOF
 
@@ -144,7 +145,7 @@ EOS;
 .tl-widget-skip{display:inline-block; width:1px; height:1em; overflow:hidden;}
 .tl-widget-skip:focus, .tl-widget-skip:active{width:auto; overflow:visible;}
 .tl-widget-frame{
-  width:99%; height:320px; border:1px solid #ccc; border-radius:4px;
+  width:99%; height:300px; border:1px solid #ccc; border-radius:4px;
 }
 .tl-widget-alt.xml{
   background:url($tl_root/small-orange-xml.gif)no-repeat; padding-left:38px;
@@ -152,16 +153,18 @@ EOS;
 .tl-widget-alt.mod-data{
   background:url($CFG->wwwroot/mod/data/icon.gif)no-repeat; padding-left:24px;
 }
+.tl-widget-new{
+  background:url($tl_root/pix/icon_new_window.gif)no-repeat; padding-left:18px;
+}
 </style>
-
   <a href="#tlw-end" class="tl-widget-skip">$skip_label</a>
-
-  <iframe
-    id="tlw0" class="tl-widget-frame" frameborder="0" src=
+  <iframe id="tlw0" class="tl-widget-frame" frameborder="0" src=
   "$widget_url"
   ></iframe>
-
+<p id="tlw-end">
+  <a class="tl-widget-new" target="_blank" href="$widget_url">$newwin_label</a> |
 $alt_link
+</p>
 
 EOF;
     return $newtext;
