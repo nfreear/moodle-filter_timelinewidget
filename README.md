@@ -64,15 +64,21 @@ Links
 * Moodle plugin page: <http://moodle.org/mod/data/view.php?rid=4802>
 * Discussion: <http://moodle.org/mod/forum/discuss.php?d=175875>
 * Code, Git: <https://github.com/nfreear/moodle-filter_timelinewidget>
-* (Bugs: <http://tracker.moodle.org/browse/CONTRIB/component/X-X-X>)
+* Bugs: <http://tracker.moodle.org/browse/CONTRIB/component/11032>
 * (Code, Hg: <https://bitbucket.org/nfreear/timelinewidget>)
 * Demo: <http://freear.org.uk/moodle>
 
 
 Notes
 -----
-* Todo: ensure that the filter works with MSIE (Javascript issues).
+* Todo: fix the XML link below the timeline - see Geoffrey Rowland's suggestion.
+* Todo: find a way to reject empty/incorrect XML files, eg. attached to forum - Ger Tielemans.
+* Todo: downgrade the print_error for missing dataUrl - Michael de Raadt.
+* Todo: deal with <div> as well as <br> when parsing INI syntax - Michael.
+* Ger made change to Moodle 1.9.x, /files/index.php so admins can edit the XML file - ?
+
 * Todo: ensure that the filter's mod/data mode works with Moodle 2.0.
+* The filter uses an iframe to avoid Javascript loading issues in MSIE.
 * mod/data: If the start and end dates for a timeline will be less than ~2000
  (or > ?), then they need to be text, not date fields in the Database activity.
 * mod/data: If PHP < 5.2, then dates less than ~1970 should be written as 
