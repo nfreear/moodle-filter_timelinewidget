@@ -30,6 +30,13 @@ appropriate integer in place of `COURSE_ID` and adjust the other parameters as n
         dataUrl = COURSE_ID/simile-invent.xml
         [/Timeline]
 
+* NOTE: it would appear that the path has changed, so if you are using Moodle 2.x, the path
+to the XML should look like:
+
+    dataUrl = 60/mod_resource/content/1/simile-invent.xml
+    (ie. <resource_id>/mod_resource/content/<course_id>/simile-invent.xml)
+
+
 You will probably wish to replace the defaults for `title`, `date` and so on:
 
         [Timeline]
