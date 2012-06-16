@@ -23,8 +23,12 @@ require_once('../../config.php');
     $config = (object) array_merge($defaults, $config);
 
     if (file_exists("$CFG->dirroot/lib/yui/2.9.0/build")) {
-        // Moodle 2.x.
+        // Moodle 2.1.x/2.2.x ?
         $yui_root= "$CFG->wwwroot/lib/yui/2.9.0/build";
+    }
+    elseif (file_exists("$CFG->dirroot/lib/yui/2.8.2/build")) {
+        // Moodle 2.0.x.
+        $yui_root= "$CFG->wwwroot/lib/yui/2.8.2/build";
     } else {
         // Or Moodle 1.9.x
         $yui_root= "$CFG->wwwroot/lib/yui";

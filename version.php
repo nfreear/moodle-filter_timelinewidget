@@ -8,4 +8,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2011052200;
+
+$plugin->component= 'filter_timelinewidget';
+$plugin->release  = '1.9.x-1.1 (Build: 2012061500)'; // User-friendly version number
+$plugin->maturity = MATURITY_BETA;
+$plugin->version  = 2012061500;
+
+#$plugin->requires = 2007101590;    // Moodle 1.9 official.
+#$plugin->requires_human = '1.9.x'; // NDF: my idea!
+#$plugin->dependencies = array();
+

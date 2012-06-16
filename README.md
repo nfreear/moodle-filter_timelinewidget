@@ -1,5 +1,3 @@
-<!-- -*- markdown -*- -->
-
 Timeline Widget filter
 ======================
 
@@ -8,6 +6,15 @@ A filter to embed an MIT SIMILE Timeline Javascript interactive widget. You and 
 Requirements: tested with Moodle 1.9.7 and 2.0.2 (all Moodle 1.9.x should work, Moodle 2.0.x - static XML only).
 
 Uses: MIT SIMILE (v2.3.0 included); Javascript; also, `parse_ini_string` function (see compat.php).
+
+
+Book
+----
+This plugin was initially developed to support the book
+"Moodle 2 for Teaching 4-9 Year Olds", by Nicholas Freear,
+published 2011 by Packt Publishing [isbn:978-1-84951-328-9]
+<http://bit.ly/packt-moodle4-9-book>
+
 
 Installation
 ------------ 
@@ -68,11 +75,12 @@ integer in place of `DATA_ID` (`mod/data/view.php?d=N`):
 
 Links
 -----
-* Moodle plugin page: <http://moodle.org/mod/data/view.php?rid=4802>
+* Moodle plugin entry: <http://moodle.org/plugins/view.php?plugin=filter_timelinewidget>
 * Discussion: <http://moodle.org/mod/forum/discuss.php?d=175875>
-* Code, Git: <https://github.com/nfreear/moodle-filter_timelinewidget>
 * Bugs: <http://tracker.moodle.org/browse/CONTRIB/component/11032>
+* Code, Git: <https://github.com/nfreear/moodle-filter_timelinewidget>
 * (Code, Hg: <https://bitbucket.org/nfreear/timelinewidget>)
+* (Old plugin page: <http://moodle.org/mod/data/view.php?rid=4802>)
 * Demo: <http://freear.org.uk/moodle>
 
 
@@ -95,6 +103,7 @@ Notes
 * There is a skip-link for accessibility.
 * The filter is internationalized and (mostly) Moodle 2 ready.
 
+
 Credits
 -------
 Filter. Copyright (c) 2010-2011 Nicholas Freear.
@@ -102,7 +111,10 @@ Filter. Copyright (c) 2010-2011 Nicholas Freear.
 *  License <http://gnu.org/copyleft/gpl.html>
 *  <http://freear.org.uk/moodle>
 
+Thanks to Darcy Christ (@1000camels) for the fork and fixes.
+
+
 SIMILE. Copyright (c) Massachusetts Institute of Technology and Contributors 2006-2009 ~ Some rights reserved.
 
-*  License <http://opensource.org/licenses/bsd-license.php>
-*  <http://simile.mit.edu>
+*  License: <http://opensource.org/licenses/bsd-license.php>
+*  Project: <http://simile.mit.edu>
